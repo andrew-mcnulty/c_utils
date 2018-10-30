@@ -60,7 +60,7 @@ void list_int_print_list(list_int* head){
 	}
 }
 
-void list_int_delete(list_int** head, int loc){	
+void list_int_delete_elem(list_int** head, int loc){	
 	//start of list?
 	if(loc == 0){
 		*head = (*head)->next_node;

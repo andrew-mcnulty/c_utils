@@ -1,12 +1,13 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include "../list_int.h"
-#define PASS 1;
-#define FAIL -1;
+#include "../src/list_int.h"
+#define PASS 1
+#define FAIL -1
 
 int main(){
     printf("TEST ADD: %d\n", test_add_and_get());
     printf("TEST GET: %d\n", test_get_node());
+    printf("TEST DELETE: %d\n", test_list_int_delete_elem());
 
 
     return 0;
@@ -50,7 +51,16 @@ int test_list_int_print_list(){
 }
 
 int test_list_int_delete_elem(){
+    list_int* list = (list_int*) malloc(sizeof(list_int));
 
+    list_int_add(list, 5);
+    list_int_add(list, 8);
+    list_int_add(list, 2);
+    list_int_add(list, 9);
+
+    list_int_delete_elem(&list, 2);
+    
+    return list_int_length(list) == 3 ? PASS: FAIL;
 }
 
 int test_list_int_get(){
