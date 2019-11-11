@@ -7,6 +7,7 @@
 int main(){
     printf("TEST ADD: %d\n", test_add_and_get());
     printf("TEST GET: %d\n", test_get_node());
+    printf("TEST LEN: %d\n", test_list_int_length());
     printf("TEST DELETE: %d\n", test_list_int_delete_elem());
 
 
@@ -26,6 +27,8 @@ int test_add_and_get(){
         }
     }
 
+	free(list);
+
     return PASS;
 }
 
@@ -41,6 +44,8 @@ int test_get_node(){
     if(dat1 != 5 || dat2 != 8){
         return FAIL;
     }
+
+	free(list);
 
     return PASS;
 
@@ -59,7 +64,7 @@ int test_list_int_delete_elem(){
     list_int_add(list, 9);
 
     list_int_delete_elem(&list, 2);
-    
+
     return list_int_length(list) == 3 ? PASS: FAIL;
 }
 
@@ -72,5 +77,12 @@ int test_list_int_as_string(){
 }
 
 int test_list_int_length(){
+    list_int* list = (list_int*) malloc(sizeof(list_int));
 
+    list_int_add(list, 5);
+    list_int_add(list, 8);
+    list_int_add(list, 2);
+    list_int_add(list, 9);
+
+	return list_int_length(list) == 4 ? PASS : FAIL;
 }

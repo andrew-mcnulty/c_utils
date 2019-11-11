@@ -9,8 +9,8 @@ void list_int_add(list_int* head, int dat){
 
 		*(head->data) = dat;
 		return;
-	}	
-	
+	}
+
 	//Iterate to end of list
 	while(head->next_node != NULL){
 		head = head->next_node;
@@ -20,7 +20,7 @@ void list_int_add(list_int* head, int dat){
 	list_int* next = (list_int*) malloc(sizeof(list_int));
 	next->next_node = NULL;
 	next->data = (int*) malloc(sizeof(int));
-	
+
 	*(next->data) = dat;
 
 	//update end of list
@@ -39,45 +39,45 @@ list_int* list_int_get_node(list_int* head, int loc){
 	}
 }
 
-void list_int_print_list(list_int* head){	
-	
+void list_int_print_list(list_int* head){
+
 	printf("[");
-	
+
 	while(1){
 		//print data of current node
 		printf("%d", *(head->data));
-		
+
 		//finish if this is end of list
 		if(head->next_node == NULL){
 			printf("]\n");
 			return;
 		}
-		
+
 		printf(",");
-		
+
 		//go to next node
 		head = head->next_node;
 	}
 }
 
-void list_int_delete_elem(list_int** head, int loc){	
+void list_int_delete_elem(list_int** head, int loc){
 	//start of list?
 	if(loc == 0){
 		*head = (*head)->next_node;
 		return;
 	}
-	
+
 	//end of list?
 	if(list_int_get_node(*head, loc + 1) == NULL){
 		list_int_get_node(*head, loc - 1)->next_node = NULL;
 		return;
 	}
-	
+
 	//pointer to this node now points to next node
 	list_int_get_node(*head, loc - 1)->next_node = list_int_get_node(*head, loc + 1);
-	
+
 	free(list_int_get_node(*head, loc));
-	
+
 	return;
 }
 
@@ -101,16 +101,19 @@ const char * list_int_as_string(list_int* head){
 }
 
 int list_int_length(list_int* head){
-	int len = 0;
+	if(head->data == NULL){
+		return 0;
+	}
 
-	while(1){
+	int len = 0;
+	short atEnd = 0;
+
+	while(atEnd == 0){
 		len++;
 
-		if(head->next_node == NULL){
-			return -1;
+		if(list_int_get_node(head, len) == NULL){
+			atEnd = 1;
 		}
-
-		head = head->next_node;
 	}
 
 	return len;
