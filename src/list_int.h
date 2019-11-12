@@ -1,5 +1,7 @@
 #ifndef LISTINT_H_INCLUDED
 #define LISTINT_H_INCLUDED
+#define BUFFLEN 128
+
 
 	typedef struct list_int{
         struct list_int* next_node;

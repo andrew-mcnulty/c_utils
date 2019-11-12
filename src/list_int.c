@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include <string.h>
 #include "list_int.h"
 
 void list_int_add(list_int* head, int dat){
@@ -88,28 +89,29 @@ int list_int_get(list_int* head, int loc){
 //TODO: Rewrite all of this. Currently broken
 //and design does not support multi digit integers
 char* list_int_as_string(list_int* head){
-	int len = list_int_length(head);
-	//Need space for each elem, commas, brackets
-	//and null terminator
-	int noOfChars = (2 * len) + 2;
+	char* string = (char*) calloc(BUFFLEN, sizeof(char));
+	sprintf(string, "[");
+	int loc = 1;
 
-	char* string = (char*) calloc(noOfChars, sizeof(char));
-	string[0] = '[';
-	string[noOfChars - 2] = ']';
-	string[noOfChars - 1] = '\0';
-
-	int listLoc = 0;
-
-	for(int i = 1; i < noOfChars - 2; i+=2){
-		int a =  list_int_get(head, listLoc);
-		printf("got %d from loc %d\n", a, listLoc);
-		if(i+1 < noOfChars - 2){
-			string[i+1] = ',';
+	while(loc < BUFFLEN - 2){
+		loc++;
+		//print data of current node
+		char num[8];
+		sprintf(num, "%d", *(head->data));
+		strcat(string, num);
+		//finish if this s iend of list
+		if(head->next_node == NULL){
+			strcat(string, "]\0");
+			return string;
 		}
 
-		listLoc++;
+		strcat(string, ",");
+
+		//go to next node
+		head = head->next_node;
 	}
-	printf(string);
+	//reached buffer length
+	strcat(string, "]\0");
 	return string;
 }
 

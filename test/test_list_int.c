@@ -78,6 +78,8 @@ int test_list_int_as_string(){
 
 	char* test = list_int_as_string(list);
 
+	printf("%s\n", test);
+
 	return 1;
 }
 
