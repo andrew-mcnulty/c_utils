@@ -40,26 +40,6 @@ list_int* list_int_get_node(list_int* head, int loc){
 	}
 }
 
-void list_int_print_list(list_int* head){
-
-	printf("[");
-
-	while(1){
-		//print data of current node
-		printf("%d", *(head->data));
-
-		//finish if this is end of list
-		if(head->next_node == NULL){
-			printf("]\n");
-			return;
-		}
-
-		printf(",");
-
-		//go to next node
-		head = head->next_node;
-	}
-}
 
 void list_int_delete_elem(list_int** head, int loc){
 	//start of list?

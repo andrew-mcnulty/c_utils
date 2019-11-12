@@ -13,8 +13,6 @@
 
 	list_int* list_int_get_node(list_int* head, int loc);
 
-	void list_int_print_list(list_int* head);
-
 	void list_int_delete_elem(list_int** head, int loc);
 
 	//returns data of item at loc
