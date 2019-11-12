@@ -10,6 +10,7 @@ int main(){
     printf("TEST LEN: %d\n", test_list_int_length());
     printf("TEST DELETE: %d\n", test_list_int_delete_elem());
 
+	int a = test_list_int_as_string();
 
     return 0;
 }
@@ -51,10 +52,6 @@ int test_get_node(){
 
 }
 
-int test_list_int_print_list(){
-
-}
-
 int test_list_int_delete_elem(){
     list_int* list = (list_int*) malloc(sizeof(list_int));
 
@@ -73,7 +70,15 @@ int test_list_int_get(){
 }
 
 int test_list_int_as_string(){
+	list_int* list = (list_int*) malloc(sizeof(list_int));
 
+    list_int_add(list, 5);
+    list_int_add(list, 8);
+    list_int_add(list, 2);
+
+	char* test = list_int_as_string(list);
+
+	return 1;
 }
 
 int test_list_int_length(){

@@ -85,18 +85,31 @@ int list_int_get(list_int* head, int loc){
 	return *(list_int_get_node(head, loc)->data);
 }
 
-const char * list_int_as_string(list_int* head){
+//TODO: Rewrite all of this. Currently broken
+//and design does not support multi digit integers
+char* list_int_as_string(list_int* head){
 	int len = list_int_length(head);
+	//Need space for each elem, commas, brackets
+	//and null terminator
+	int noOfChars = (2 * len) + 2;
 
-	char* string = (char * )calloc(len + 2, sizeof(char));
-
+	char* string = (char*) calloc(noOfChars, sizeof(char));
 	string[0] = '[';
-	string[len + 1] = ']';
+	string[noOfChars - 2] = ']';
+	string[noOfChars - 1] = '\0';
 
-	for(int i = 1; i < len + 1; i++){
-		string[i] = (char) list_int_get(head, i);
+	int listLoc = 0;
+
+	for(int i = 1; i < noOfChars - 2; i+=2){
+		int a =  list_int_get(head, listLoc);
+		printf("got %d from loc %d\n", a, listLoc);
+		if(i+1 < noOfChars - 2){
+			string[i+1] = ',';
+		}
+
+		listLoc++;
 	}
-
+	printf(string);
 	return string;
 }
 
@@ -118,4 +131,3 @@ int list_int_length(list_int* head){
 
 	return len;
 }
-
